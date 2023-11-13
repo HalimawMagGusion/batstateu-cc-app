@@ -54,7 +54,7 @@ const Ad = () => {
         const q = query(reportsRef, where("ad", "==", id));
         const reportsSnap = await getDocs(q);
         let reports = [];
-        reportsSnap.forEach((doc) => reports.push(doc.data()));
+        reportsSnap.forEach((document) => reports.push(document.data()));
         setReports(reports);
     };
 
@@ -80,9 +80,13 @@ const Ad = () => {
             const reportsRef = collection(db, "reports");
             const q = query(reportsRef, where("ad", "==", id));
             const reportsSnap = await getDocs(q);
-            reportsSnap.forEach(async (doc) => {
-                await deleteDoc(doc(db, "reports", doc.id));
-            });
+            
+            await Promise.all(
+                reportsSnap.docs.map(async (document) => {
+                    await deleteDoc(doc(db, "reports", document.id));
+                }
+            ));
+
             navigate(`/profile/${auth.currentUser.uid}`);
         }
     };
@@ -120,11 +124,10 @@ const Ad = () => {
         window.location.reload();
     };
 
-    
-
     return ad ? (
-    <div className="page-container">
-    <div className="content-wrap">
+
+        <div className="page-container">
+        <div className="content-wrap">
         <div className="mt-5 container">
             <div className="row">
                 <div
@@ -140,7 +143,7 @@ const Ad = () => {
                                 }`}
                                 key={i}
                             >
-                                <a href={image.url} target="_blank" rel="noopener noreferrer">
+                                <a href={image.url}>
                                     <img
                                         src={image.url}
                                         className="d-block w-100"
@@ -232,7 +235,7 @@ const Ad = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="card mt-3 ">
+                    <div className="card mt-3">
                         <div className="card-body">
                             <h5 className="card-title">Seller Description</h5>
                             <Link to={`/profile/${ad.postedBy}`}>
@@ -247,7 +250,6 @@ const Ad = () => {
                                                 height: "50px",
                                                 borderRadius: "50%",
                                                 marginRight: "10px",
-                                                objectFit: "cover"
                                             }}
                                         />
                                     ) : (
@@ -369,9 +371,10 @@ const Ad = () => {
                 </div>
             </div>
         </div>
-        <br/><br/><br/>
+
         </div>
-        <Footer/>
+        <br/> <br/><br/>
+        <Footer />
         </div>
     ) : null;
 };

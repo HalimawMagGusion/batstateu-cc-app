@@ -62,76 +62,86 @@ const Reports = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {reports.map((report) => (
-                        <tr key={report.id}>
-                            <td>{report.reportedBy.name}</td>
-                            <td>
-                                {report.status !== "resolved" ? (
-                                    <Link
-                                        to={`/${report.ad.category.toLowerCase()}/${
-                                            report.ad.id
-                                        }`}
-                                        className="text-decoration-none"
-                                    >
-                                        {report.ad.title}
-                                    </Link>
-                                ) : (
-                                    report.adTitle
-                                )}
-                            </td>
-                            <td>
-                                <Moment fromNow>{report.createdAt}</Moment>
-                            </td>
-                            <td>
-                                <select
-                                    className="form-select"
-                                    disabled={
-                                        report.status !== "pending" ||
-                                        report.ad.isSold
-                                    }
-                                    defaultValue={
-                                        report.ad.isSold ? "sold" : "pending"
-                                    }
-                                    onChange={(e) =>
-                                        updateDoc(
-                                            doc(db, "reports", report.id),
-                                            {
-                                                status: e.target.value,
-                                            }
-                                        ).then(() => {
-                                            getReports().then((reports) =>
-                                                setReports(reports)
-                                            );
-
-                                            deleteDoc(
-                                                doc(db, "ads", report.ad.id)
-                                            );
-                                        })
-                                    }
-                                >
-                                    <option
-                                        disabled
-                                        value={
+                    {reports.length > 0 ? (
+                        reports.map((report) => (
+                            <tr key={report.id}>
+                                <td>{report.reportedBy.name}</td>
+                                <td>
+                                    {report.status !== "resolved" ? (
+                                        <Link
+                                            to={`/${report.ad.category.toLowerCase()}/${
+                                                report.ad.id
+                                            }`}
+                                            className="text-decoration-none"
+                                        >
+                                            {report.ad.title}
+                                        </Link>
+                                    ) : (
+                                        report.adTitle
+                                    )}
+                                </td>
+                                <td>
+                                    <Moment fromNow>{report.createdAt}</Moment>
+                                </td>
+                                <td>
+                                    <select
+                                        className="form-select"
+                                        disabled={
+                                            report.status !== "pending" ||
+                                            report.ad.isSold
+                                        }
+                                        defaultValue={
                                             report.ad.isSold
                                                 ? "sold"
                                                 : "pending"
                                         }
+                                        onChange={(e) =>
+                                            updateDoc(
+                                                doc(db, "reports", report.id),
+                                                {
+                                                    status: e.target.value,
+                                                }
+                                            ).then(() => {
+                                                getReports().then((reports) =>
+                                                    setReports(reports)
+                                                );
+
+                                                deleteDoc(
+                                                    doc(db, "ads", report.ad.id)
+                                                );
+                                            })
+                                        }
                                     >
-                                        {report.ad.isSold
-                                            ? "Sold"
-                                            : report.status !== "pending"
-                                            ? report.status
-                                                  .charAt(0)
-                                                  .toUpperCase() +
-                                              report.status.slice(1)
-                                            : " Select status"}
-                                    </option>
-                                    <option value="reject">Reject</option>
-                                    <option value="resolved">Resolved</option>
-                                </select>
-                            </td>
+                                        <option
+                                            disabled
+                                            value={
+                                                report.ad.isSold
+                                                    ? "sold"
+                                                    : "pending"
+                                            }
+                                        >
+                                            {report.ad.isSold
+                                                ? "Sold"
+                                                : report.status !== "pending"
+                                                ? report.status
+                                                      .charAt(0)
+                                                      .toUpperCase() +
+                                                  report.status.slice(1)
+                                                : " Select status"}
+                                        </option>
+                                        <option value="reject">Reject</option>
+                                        <option value="resolved">
+                                            Resolved
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan={4}>No reports found</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>

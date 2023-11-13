@@ -72,8 +72,9 @@ const Home = () => {
           </select>
         </div>
       </div>
-      <h3 className="mb-4">Recent Listings</h3>
-      <div className="row ">
+      <h3 className="mb-2">Recent Listings</h3>
+      <hr className="mb-4"></hr>
+      <div className="row">
         {ads.map((ad) => (
           <div className="col-sm-6 col-md-4 col-xl-3 mb-5" key={ad.id}>
             <AdCard ad={ad} />

@@ -4,6 +4,7 @@ import { db } from "../FirebaseConfig";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
+    const [name, setName] = useState("");
 
     const getUsers = async () => {
         const usersRef = collection(db, "users");
@@ -60,42 +61,48 @@ const Users = () => {
     return (
         <div className="container mt-5">
             <h3>Users</h3>
-            {/* create a table that displays all the user details (name, email, isOnline) and add actions (ban, unban) */}
+            {/* create a table that displays all the user details (name, email, isOnline, verified) and add actions (ban, unban) */}
             <table className="table table-hover mt-3">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Is Online</th>
-
+                        <th scope="col">Verified</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
-                        <tr key={user.id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.isOnline ? "Yes" : "No"}</td>
-
-                            <td>
-                                <button
-                                    className="btn btn-danger"
-                                    disabled={user.isBanned}
-                                    onClick={() => handleBan(user.id)}
-                                >
-                                    Ban
-                                </button>
-                                <button
-                                    className="btn btn-success ms-3"
-                                    disabled={!user.isBanned}
-                                    onClick={() => handleUnban(user.id)}
-                                >
-                                    Unban
-                                </button>
-                            </td>
+                    {users.length > 0 ? (
+                        users.map((user) => (
+                            <tr key={user.id}>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.isOnline ? "Yes" : "No"}</td>
+                                <td>{user.verified ? "Yes" : "No"}</td>
+                                <td>
+                                    <button
+                                        className="btn btn-danger ms-3"
+                                        disabled={user.isBanned}
+                                        onClick={() => handleBan(user.id)}
+                                    >
+                                        Ban
+                                    </button>
+                                    <button
+                                        className="btn btn-success ms-3"
+                                        disabled={!user.isBanned}
+                                        onClick={() => handleUnban(user.id)}
+                                    >
+                                        Unban
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan={5}>No users found</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>
