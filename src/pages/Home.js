@@ -23,7 +23,13 @@ const Home = () => {
       );
     } else if (sort === "high") {
       q = query(adsRef, orderBy("price", "desc"));
-    } else {
+    } else if(filter !== "" && sort === "high") {
+      q = query(adsRef, where("category", "==", filter), orderBy("publishedAt", "desc"))
+      }
+      else if(filter !== "" && sort === "low") {
+      q = query(adsRef, where("category", "==", filter), orderBy("publishedAt", "asc"))
+      }
+    else {
       q = query(adsRef, orderBy("price", "asc"));
     }
     const adDocs = await getDocs(q);
