@@ -4,7 +4,6 @@ import {
     deleteDoc,
     doc,
     getDoc,
-    setDoc,
     updateDoc,
     collection,
     getDocs,
@@ -98,20 +97,7 @@ const Ad = () => {
         getAd();
     };
 
-    const createChatroom = async () => {
-        const loggedInUser = auth.currentUser.uid;
-        const chatId =
-            loggedInUser > ad.postedBy
-                ? `${loggedInUser}.${ad.postedBy}.${id}`
-                : `${ad.postedBy}.${loggedInUser}.${id}`;
 
-        await setDoc(doc(db, "messages", chatId), {
-            ad: id,
-            users: [loggedInUser, ad.postedBy],
-        });
-
-        navigate("/chat", { state: { ad } });
-    };
 
     const reportAd = async () => {
         await addDoc(collection(db, "reports"), {
