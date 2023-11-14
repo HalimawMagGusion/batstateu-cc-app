@@ -106,9 +106,17 @@ const Reports = () => {
                                                     setReports(reports)
                                                 );
 
-                                                deleteDoc(
-                                                    doc(db, "ads", report.ad.id)
-                                                );
+                                                if (
+                                                    e.target.value ===
+                                                    "resolved"
+                                                )
+                                                    deleteDoc(
+                                                        doc(
+                                                            db,
+                                                            "ads",
+                                                            report.ad.id
+                                                        )
+                                                    );
                                             })
                                         }
                                     >

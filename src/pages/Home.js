@@ -13,25 +13,37 @@ const Home = () => {
   const getAds = async () => {
     const adsRef = collection(db, "ads");
     let q;
-    if (filter !== "" && sort !== "") {
-      q = query(adsRef, orderBy("publishedAt", "desc"));
-    } else if (filter !== "") {
-      q = query(
-        adsRef,
-        where("category", "==", filter),
-        orderBy("publishedAt", "desc")
-      );
-    } else if (sort === "high") {
-      q = query(adsRef, orderBy("price", "desc"));
-    } else if(filter !== "" && sort === "high") {
-      q = query(adsRef, where("category", "==", filter), orderBy("publishedAt", "desc"))
+  
+    if (filter !== "") {
+      if (sort === "high") {
+        q = query(
+          adsRef,
+          where("category", "==", filter),
+          orderBy("price", "desc")
+        );
+      } else if (sort === "low") {
+        q = query(
+          adsRef,
+          where("category", "==", filter),
+          orderBy("price", "asc")
+        );
+      } else {
+        q = query(
+          adsRef,
+          where("category", "==", filter),
+          orderBy("publishedAt", "desc")
+        );
       }
-      else if(filter !== "" && sort === "low") {
-      q = query(adsRef, where("category", "==", filter), orderBy("publishedAt", "asc"))
+    } else {
+      if (sort === "high") {
+        q = query(adsRef, orderBy("price", "desc"));
+      } else if (sort === "low") {
+        q = query(adsRef, orderBy("price", "asc"));
+      } else {
+        q = query(adsRef, orderBy("publishedAt", "desc"));
       }
-    else {
-      q = query(adsRef, orderBy("price", "asc"));
     }
+  
     const adDocs = await getDocs(q);
     let ads = [];
     adDocs.forEach((doc) => ads.push({ ...doc.data(), id: doc.id }));
