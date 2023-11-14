@@ -68,7 +68,6 @@ const Users = () => {
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Is Online</th>
-                        <th scope="col">Verified</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -79,7 +78,6 @@ const Users = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.isOnline ? "Yes" : "No"}</td>
-                                <td>{user.verified ? "Yes" : "No"}</td>
                                 <td>
                                     <button
                                         className="btn btn-danger ms-3"
