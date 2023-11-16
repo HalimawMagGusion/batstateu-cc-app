@@ -128,7 +128,7 @@
   transform: rotateX(0), rotateY(0) rotateZ(0);
   display: inline-block;
   outline: 2px dashed transparent;
-  transition: all 600ms ease;
+  transition: all .3s ease;
 }
 
 
