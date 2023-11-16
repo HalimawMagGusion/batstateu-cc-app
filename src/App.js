@@ -30,7 +30,7 @@ function App() {
                 <ScrollToTopButton/>
                 <Routes>
                     <Route element={<PrivateRoute />}>
-                        <Route path="/sell" element={<Sell />} />
+                        <Route path="/place-an-ad" element={<Sell />} />
                         <Route path="/favorites" element={<MyFavorites />} />
                         <Route path="/profile/:id" element={<Profile />} />
                         <Route path="/:category/:id" element={<Ad />} />

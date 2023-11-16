@@ -126,13 +126,13 @@ const Navbar = () => {
 
                                 <button
                                     className="btn btn-danger mb-1 mt-1 m-2 border-0 shadow hover-item1"
-                                ><Link className="nostyle text-light" to={`/sell`}>
+                                ><Link className="nostyle text-light text-nowrap" to={`/place-an-ad`}>
                                     <FiPlusSquare className='m-1' size={15}/>Place an Ad
                                     </Link>
                                 </button>
                             
                                 <button
-                                    className="btn btn-dark mb-1 mt-1 m-2  logout btn-1 shadow"
+                                    className="btn btn-dark mb-1 mt-1 m-2 logout btn-1 shadow"
                                     onClick={handleSignout}
                                 >
                                     Logout
