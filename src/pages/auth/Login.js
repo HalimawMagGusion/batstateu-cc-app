@@ -7,6 +7,23 @@ import Footer from "../../components/Footer";
 import { FaEye, FaEyeSlash} from "react-icons/fa";
 import {Button, InputGroup} from 'react-bootstrap';
 
+
+const handleFirebaseError = (errorCode) => {
+    switch (errorCode) {
+        case "auth/user-not-found":
+            return "User not found. Please check your email.";
+        case "auth/wrong-password":
+            return "Invalid password. Please try again.";
+        case "auth/too-many-requests":
+            return "Too many unsuccessful login attempts. Please try again later.";
+        case "auth/network-request-failed":
+            return "Network error. Please check your internet connection.";
+        // Add more cases as needed for specific error handling
+        default:
+            return "Invalid SR-Code or password. Please ty again.";
+    }
+};
+
 const Login = () => {
     const [values, setValues] = useState({
         email: "",
@@ -83,8 +100,9 @@ const Login = () => {
                 await signOut(auth);
             }
         } catch (error) {
-            setValues({ ...values, error: error.message, loading: false });
-        }
+        const errorMessage = handleFirebaseError(error.code);
+        setValues({ ...values, error: errorMessage, loading: false });
+    }
     };
 
     return (
