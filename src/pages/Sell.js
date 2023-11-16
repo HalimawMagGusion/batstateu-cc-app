@@ -6,7 +6,7 @@ import { storage, db, auth } from "../FirebaseConfig";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
-const categories = ["School Supplies", "Electronics", "Fashion", "Furniture","Services","Lost and Found", "Miscellaneous"];
+const categories = ["School Supplies", "Electronics", "Fashion", "Furniture","Services","In Search Of","Lost and Found", "Miscellaneous"];
 const locations = ["Pablo Borbon", "Alangilan", "Lipa", "Nasugbu", "Malvar", "Lemery", "Balayan", "Lobo", "Rosario", "San Juan"];
 
 const Sell = () => {
