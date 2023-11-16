@@ -129,7 +129,7 @@ const Ad = () => {
                                 }`}
                                 key={i}
                             >
-                                <a href={image.url}>
+                                <a href={image.url} target="_blank">
                                     <img
                                         src={image.url}
                                         className="d-block w-100"

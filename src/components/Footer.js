@@ -24,12 +24,12 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="me-3">
-                  <a href="https://www.facebook.com/groups/1433847356979674" style={style}>
+                  <a href="https://www.facebook.com/groups/1433847356979674" target="_blank" style={style}>
                     <FaSquareFacebook size={34} style={style} />
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/batstateucc/" style={style}>
+                  <a href="https://www.instagram.com/batstateucc/" target="_blank" style={style}>
                     <AiFillInstagram size={40} style={style} />
                   </a>
                 </li>
@@ -40,7 +40,7 @@ const Footer = () => {
           <div className="text-center text-light">
 
             <p>
-              <a href="https://www.facebook.com/groups/1433847356979674" style={styleFooter}>BatStateU Tambayan</a> &nbsp;|&nbsp; Email:{' '}
+              <a href="https://www.facebook.com/groups/1433847356979674" target="_blank" style={styleFooter}>BatStateU Tambayan</a> &nbsp;|&nbsp; Email:{' '}
               <a href="mailto:batstateucampusclassifieds@gmail.com" style={styleFooter}>
               batstateucampusclassifieds@gmail.com
               </a>

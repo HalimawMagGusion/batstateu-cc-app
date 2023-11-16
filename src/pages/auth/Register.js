@@ -150,7 +150,7 @@ const Register = () => {
     <div className="text-center">
 		<input required type="checkbox" name="Terms" className="m-2" />
     <label htmlFor="Terms" className="form-label mt-4">
-			I agree to the <Link to="/terms-and-conditions" className="text-danger">Terms and Conditions</Link>
+			I agree to the <Link to="/terms-and-conditions" className="text-danger" target="_blank">Terms and Conditions</Link>
 		</label>
 		</div>
 

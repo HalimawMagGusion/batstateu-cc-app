@@ -62,6 +62,7 @@ const Home = () => {
     padding: '20px', // Add any other styles you need
     borderRadius: '15px',
     backgroundImage: `url(${Bgpng})`, // Add this line
+    alt: 'Background Images',
     backgroundSize: 'cover', // Add this line to adjust the background size
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center', // Center the background image

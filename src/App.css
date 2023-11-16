@@ -134,6 +134,9 @@
 
 .btn-quote:hover {
   color: #dc3545;
+  background-color: #fff !important;
+  border: 2px solid #dc3545;
+  text-decoration: none;
   inset: 6px 0 5.5px 0;
   transform: rotateX(5deg) rotateY(3deg) rotateZ(.25deg);
   box-shadow: none;
