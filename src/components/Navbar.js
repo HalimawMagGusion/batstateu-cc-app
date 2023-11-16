@@ -105,7 +105,7 @@ const Navbar = () => {
 
                                 {userDoc?.isAdmin && (
                                     <>
-                                        <li className="nav-item">
+                                        <li className="nav-item mt-1">
                                             <Link
                                                 className="nav-link"
                                                 to={`/admin/reports`}
@@ -113,7 +113,7 @@ const Navbar = () => {
                                                 Reports
                                             </Link>
                                         </li>
-                                        <li className="nav-item">
+                                        <li className="nav-item mt-1">
                                             <Link
                                                 className="nav-link"
                                                 to={`/admin/users`}

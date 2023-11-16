@@ -131,7 +131,8 @@
   transition: all 600ms ease;
 }
 
-.btn:hover {
+
+.btn-quote:hover {
   color: #dc3545;
   inset: 6px 0 5.5px 0;
   transform: rotateX(5deg) rotateY(3deg) rotateZ(.25deg);
