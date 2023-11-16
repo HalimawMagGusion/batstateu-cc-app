@@ -6,6 +6,7 @@ import { AuthContext } from "../context/auth";
 import { auth, db } from "../FirebaseConfig";
 import { useState, useEffect } from "react";
 import logo from "../Images/Title1.png";
+import {FiPlusSquare} from "react-icons/fi"
 
 const Navbar = () => {
     const { user } = useContext(AuthContext);
@@ -65,17 +66,17 @@ const Navbar = () => {
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         {user ? (
                             <>
-                                <li className="nav-item">
+                                <li className="nav-item mt-1">
                                     <Link className="nav-link" to={`/`}>
                                         Home
                                     </Link>
                                 </li>
-                                <li className="nav-item">
+                                <li className="nav-item mt-1">
                                     <Link className="nav-link" to={`/about`}>
                                             About
                                     </Link>
                                 </li>
-                                <li className="nav-item">
+                                <li className="nav-item mt-1">
                                     <Link
                                         className="nav-link"
                                         to={`/profile/${user.uid}`}
@@ -83,7 +84,7 @@ const Navbar = () => {
                                         Profile
                                     </Link>
                                 </li>
-                                <li className="nav-item">
+                                <li className="nav-item mt-1">
                                     <Link
                                         className="nav-link"
                                         to={`/favorites`}
@@ -91,11 +92,16 @@ const Navbar = () => {
                                         Favorites
                                     </Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to={`/sell`}>
-                                        Add a Listing
-                                    </Link>
+                                
+                                 {/* 
+ 
+                                 <li className="nav-item">
+                                    
+                                <Link to={`/sell`} className="btn btn-danger shadow"><FiPlusSquare className='m-1' size={15}/>
+                                Place an Ad</Link>
+                                     
                                 </li>
+                                */} 
 
                                 {userDoc?.isAdmin && (
                                     <>
@@ -119,7 +125,14 @@ const Navbar = () => {
                                 )}
 
                                 <button
-                                    className="btn btn-danger btn-sm mb-1 mt-1 m-3 logout btn-1"
+                                    className="btn btn-danger mb-1 mt-1 m-2 border-0 shadow hover-item1"
+                                ><Link className="nostyle text-light" to={`/sell`}>
+                                    <FiPlusSquare className='m-1' size={15}/>Place an Ad
+                                    </Link>
+                                </button>
+                            
+                                <button
+                                    className="btn btn-dark mb-1 mt-1 m-2  logout btn-1 shadow"
                                     onClick={handleSignout}
                                 >
                                     Logout

@@ -4,6 +4,9 @@ import { db } from "../FirebaseConfig";
 import AdCard from "../components/AdCard";
 import CarouselHeader from "../components/CarouselHeader";
 import Footer from "../components/Footer";
+import { Link } from 'react-router-dom';
+import {FiPlusSquare} from "react-icons/fi"
+import Bgpng from "../Images/QuoteBackground.png"
 
 const Home = () => {
   const [ads, setAds] = useState([]);
@@ -54,14 +57,57 @@ const Home = () => {
     getAds();
   }, [filter, sort]);
 
+  const containerStyle = {
+    position: 'relative',
+    padding: '20px', // Add any other styles you need
+    borderRadius: '15px',
+    backgroundImage: `url(${Bgpng})`, // Add this line
+    backgroundSize: 'cover', // Add this line to adjust the background size
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center', // Center the background image
+
+  };
+
+  const gradientStyle = {
+    content: '',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: 'linear-gradient(90deg, rgba(220,53,69,1) 30%, rgba(239,167,174,1) 100%)',
+    borderRadius: '15px',
+    opacity: 1,
+    zIndex: -1,
+  };
+
+
+  
+
+
   return (
     <div className="page-container">
     <div className="content-wrap">
     <div className="mt-5 container">
       <CarouselHeader/>
+
+      <div className="container text-center mt-4 p-4 shadow-lg" style={containerStyle}>
+      <div style={gradientStyle}></div> 
+     
+      <div className="d-flex flex-column align-items-center">
+        
+        <h3 className="text-light pt-3 pb-1"><span className="text-shadow">Your Gateway to Campus Bargains!</span><Link to={`/sell`} className="btn btn-light mt-2 mb-3 m-3 btn-quote"><FiPlusSquare className='mb-1' size={15}/><span></span> Place an Ad</Link> </h3>
+        
+       
+
+      </div>
+    </div>
+
+
+
       <div className="d-flex justify-content-center justify-content-md-between align-items-center flex-wrap mb-5 mt-5 form">
         <div>
-          <h6>Filter By Category</h6>
+          <h6 className="pointer">Filter By Category</h6>
           <select
             className="form-select"
             style={{ width: "200px", margin:"auto"}}
@@ -78,7 +124,7 @@ const Home = () => {
           </select>
         </div>
         <div>
-          <h6>Sort By</h6>
+          <h6 className="pointer">Sort By</h6>
           <select
             className="form-select "
             style={{ width: "200px", margin: "auto" }}

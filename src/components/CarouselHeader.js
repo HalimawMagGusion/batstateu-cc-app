@@ -25,7 +25,7 @@ const CarouselHeader = () => {
     return(
     
     <div className="mt-5 shadow">
-        <div style={{ borderRadius: '10px', overflow: 'hidden' }}>
+        <div style={{ borderRadius: '15px', overflow: 'hidden' }}>
         <Carousel style={{ height: '300px',  backgroundSize: 'cover', backgroundPosition: 'center'  }} >
         <Carousel.Item>
           <div style={blurredImageStyle}>
@@ -33,7 +33,7 @@ const CarouselHeader = () => {
               className="d-block w-100"
               src="/Images/BatStateUCarouselSlide1.jpg"
               alt="BatStateU Campus"
-              style={{ width: '400px', height: '300px', objectFit: 'cover', filter: 'brightness(0.8)', opacity: '0.8'}}
+              style={{ width: '300px', height: '300px', objectFit: 'cover', filter: 'brightness(0.8)', opacity: '0.8'}}
             />
           </div>
             <div style={gradientStyle}></div>
