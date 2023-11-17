@@ -214,7 +214,7 @@ const Sell = () => {
           cols="30"
           rows="3"
           className="form-control"
-          maxLength={100}
+          maxLength={200}
           value={description}
           onChange={handleChange}
           required
