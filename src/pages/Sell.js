@@ -6,7 +6,7 @@ import { storage, db, auth } from "../FirebaseConfig";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
-const categories = ["School Supplies", "Electronics", "Fashion", "Furniture","Services","In Search Of","Lost and Found", "Miscellaneous"];
+const categories = ["School Supplies", "Electronics", "Fashion", "Furniture","Services","In Search For","Lost and Found", "Miscellaneous"];
 const locations = ["Pablo Borbon", "Alangilan", "Lipa", "Nasugbu", "Malvar", "Lemery", "Balayan", "Lobo", "Rosario", "San Juan"];
 
 const Sell = () => {
@@ -35,6 +35,23 @@ const Sell = () => {
     loading,
   } = values;
 
+  const [imageAlert, setImageAlert] = useState("");
+
+  const handleImageChange = (e) => {
+    const selectedImages = e.target.files;
+  
+    if (selectedImages.length > 0) {
+      setValues({ ...values, images: selectedImages });
+      setImageAlert("Image/s uploaded successfully!");
+    } else {
+      setImageAlert("Please upload at least one image");
+    }
+  };
+
+  const handleCloseImageAlert = () => {
+    setImageAlert("");
+  };
+
   const handleChange = (e) =>
     setValues({ ...values, [e.target.name]: e.target.value });
 
@@ -44,6 +61,10 @@ const Sell = () => {
     setValues({ ...values, error: "", loading: true });
 
     try {
+      if (images.length === 0) {
+        throw new Error("Please upload at least one image");
+      }
+
       let imgs = [];
       // loop through images
       if (images.length) {
@@ -112,10 +133,23 @@ const Sell = () => {
           style={{ display: "none" }}
           accept="image/*"
           multiple
-          onChange={(e) => setValues({ ...values, images: e.target.files })}
-          required
+          onChange={handleImageChange}
         />
       </div>
+
+      {imageAlert && (
+            <div className="mb-3 text-center">
+              <div
+                className="alert alert-success"
+                onClick={handleCloseImageAlert}
+                role="alert"
+              >
+                {imageAlert}
+              </div>
+            </div>
+          )}
+
+
       <div className="mb-3">
         <label className="form-label">Title</label>
         <input
@@ -180,6 +214,7 @@ const Sell = () => {
           cols="30"
           rows="3"
           className="form-control"
+          maxLength={100}
           value={description}
           onChange={handleChange}
           required
