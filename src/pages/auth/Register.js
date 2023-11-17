@@ -35,6 +35,18 @@ const Register = () => {
       return;
     }
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!password.match(passwordRegex)) {
+      setValues({
+        ...values,
+        error:
+          "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+        loading: false,
+      });
+      return;
+    }
+
     const combinedEmail = email + "@g.batstate-u.edu.ph";
 
     setValues({ ...values, error: "", loading: true });
@@ -130,7 +142,8 @@ const Register = () => {
           minLength={8}
           onChange={handleChange}
           required
-        />       
+        />
+        <p className="mt-2" style={{fontSize:'13px'}} >*Password must be 8 characters with at least one uppercase letter, number, and special character</p>       
       </div>
 
       <div className="mb-4">

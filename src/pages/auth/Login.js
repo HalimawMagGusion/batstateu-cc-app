@@ -20,7 +20,7 @@ const handleFirebaseError = (errorCode) => {
             return "Network error. Please check your internet connection.";
         // Add more cases as needed for specific error handling
         default:
-            return "Invalid SR-Code or password. Please ty again.";
+            return "Invalid SR-Code or password. Please try again.";
     }
 };
 
