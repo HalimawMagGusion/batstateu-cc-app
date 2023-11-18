@@ -29,7 +29,13 @@ const Home = () => {
           adsRef,
           where("category", "==", filter),
           orderBy("price", "asc")
-        );
+        );        
+      } else if (sort === "oldest") {
+        q = query(
+          adsRef,
+          where("category", "==", filter),
+          orderBy("publishedAt", "asc")
+        ); 
       } else {
         q = query(
           adsRef,
@@ -42,6 +48,8 @@ const Home = () => {
         q = query(adsRef, orderBy("price", "desc"));
       } else if (sort === "low") {
         q = query(adsRef, orderBy("price", "asc"));
+      } else if (sort === "oldest") {
+        q = query(adsRef, orderBy("publishedAt", "asc"));
       } else {
         q = query(adsRef, orderBy("publishedAt", "desc"));
       }
@@ -132,9 +140,10 @@ const Home = () => {
             style={{ width: "200px", margin: "auto" }}
             onChange={(e) => setSort(e.target.value)}
           >
-            <option value="">Latest</option>
-            <option value="high">Price High</option>
-            <option value="low">Price Low</option>
+            <option value="">Latest-Oldest</option>
+            <option value="low">Oldest-Latest</option>
+            <option value="high">Highest-Lowest Price</option>
+            <option value="low">Lowest-Highest Price</option>
           </select>
         </div>
       </div>
