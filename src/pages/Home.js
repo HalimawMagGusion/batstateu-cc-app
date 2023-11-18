@@ -105,7 +105,7 @@ const Home = () => {
      
       <div className="d-flex flex-column align-items-center">
         
-        <h3 className="text-light pt-3 pb-1"><span className="text-shadow">Your Gateway to Campus Bargains!</span><Link to={`place-an-ad`} className="btn mt-2 mb-3 m-3 btn-quote"><FiPlusSquare className='mb-1' size={15}/><span></span> Place an Ad</Link> </h3>
+        <h3 className="text-light pt-3 pb-1"><span className="text-shadow">Your Gateway to Campus Bargains!</span><Link to={`place-an-ad`} className="btn mt-2 mb-3 m-3 btn-quote"><FiPlusSquare size={15}/><span></span> Place an Ad</Link> </h3>
         
        
 
