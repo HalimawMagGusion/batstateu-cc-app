@@ -147,6 +147,7 @@ const Home = () => {
       <option value="Fashion">Fashion</option>
       <option value="Furniture">Furniture</option>
       <option value="Services">Services</option>
+      <option value="Rentals">Rentals</option>
       <option value="In Search For">In Search For</option>
       <option value="Lost and Found">Lost and Found</option>
       <option value="Miscellaneous">Miscellaneous</option>
@@ -168,8 +169,9 @@ const Home = () => {
     </select>
   </div>
 </div>
-
-      <h3 className="mb-2">Recent Listings</h3>
+      <div className="card shadow border-0">
+        <div className="p-5">
+      <h3 className="mb-2">Posted Listings</h3>
       <hr className="mb-4"></hr>
       <div className="row">
         {ads.map((ad) => (
@@ -178,6 +180,8 @@ const Home = () => {
           </div>
         ))}
       </div>
+    </div>
+    </div>
     </div>
     <br/><br/><br/><br/>
 

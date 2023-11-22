@@ -11,6 +11,10 @@ import {FiPlusSquare} from "react-icons/fi"
 const Navbar = () => {
     const { user } = useContext(AuthContext);
     const [userDoc, setUserDoc] = useState(null);
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+    const [showUserLoginNote, setShowUserLoginNote] = useState(true);
+    const [showAdminLoginNote, setShowAdminLoginNote] = useState(true);
     const navigate = useNavigate();
 
     const getUserDoc = async () => {
@@ -23,7 +27,15 @@ const Navbar = () => {
 
     useEffect(() => {
         getUserDoc();
-    }, [user]);
+
+            // Set login status for users
+        setIsUserLoggedIn(!!user);
+
+    // Check if the user is an admin (You may need to adjust this logic based on your user data structure)
+         if (userDoc && userDoc.isAdmin) {
+            setIsAdminLoggedIn(true);
+        }
+    }, [user, userDoc]);
 
     const handleSignout = async () => {
         // update user doc
@@ -32,12 +44,57 @@ const Navbar = () => {
         });
         // logout
         await signOut(auth);
+
+        // Reset login status for users and admins
+        setIsUserLoggedIn(false);
+        setIsAdminLoggedIn(false);
+
         // navigate to login
         navigate("/auth/login");
     };
 
     return (
+        <div>
+        <div className="row justify-content-end mx-0">
+            {/* Display a notification for user login */}
+            {isUserLoggedIn && showUserLoginNote && !isAdminLoggedIn && (
+                <div className="alert alert-info alert-dismissible fade show col-12 rounded-0 m-0" role="alert" style={{ lineHeight: ".1" }}>
+                    <div className="d-flex justify-content-between">
+                        <span style={{ margin: "auto"}}>You are logged in as a user! Welcome!</span>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            style={{ fontSize: "0.6rem",
+                            paddingBottom: "5px"
+                        }}
+                            onClick={() => setShowUserLoginNote(false)}
+                        ></button>
+                    </div>
+                </div>
+            )}
+
+            {/* Display a notification for admin login */}
+            {isAdminLoggedIn && showAdminLoginNote && (
+                <div className="alert alert-info alert-dismissible fade show col-12 rounded-0 m-0" role="alert" style={{ lineHeight: ".1" }}>
+                    <div className="d-flex justify-content-between">
+                        <span style={{ margin: "auto"}}>You are logged in as an admin! Welcome!</span>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            style={{ fontSize: "0.6rem",
+                            paddingBottom: "5px"
+                        }}
+                            onClick={() => setShowAdminLoginNote(false)}
+                        ></button>
+                    </div>
+                </div>
+            )}
+        </div>
+            
+            
+
         <nav className="navbar navbar-expand-md bg-light navbar-light sticky-top shadow" >
+            
             <div className="container">
                 <Link className="navbar-brand" to="/">
                     <img
@@ -164,6 +221,7 @@ const Navbar = () => {
                 </div>
             </div>
         </nav>
+        </div>
     );
 };
 
