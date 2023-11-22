@@ -169,7 +169,7 @@ const Home = () => {
     </select>
   </div>
 </div>
-      <div className="card shadow border-0">
+      <div className="card shadow-lg border-0">
         <div className="p-5">
       <h3 className="mb-2">Posted Listings</h3>
       <hr className="mb-4"></hr>

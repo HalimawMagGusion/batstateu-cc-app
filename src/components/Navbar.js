@@ -58,7 +58,7 @@ const Navbar = () => {
         <div className="row justify-content-end mx-0">
             {/* Display a notification for user login */}
             {isUserLoggedIn && showUserLoginNote && !isAdminLoggedIn && (
-                <div className="alert alert-info alert-dismissible fade show col-12 rounded-0 m-0" role="alert" style={{ lineHeight: ".1" }}>
+                <div className="alert alert-success alert-dismissible fade show col-12 rounded-0 m-0" role="alert" style={{ lineHeight: ".1" }}>
                     <div className="d-flex justify-content-between">
                         <span style={{ margin: "auto"}}>You are logged in as a user! Welcome!</span>
                         <button
@@ -75,7 +75,7 @@ const Navbar = () => {
 
             {/* Display a notification for admin login */}
             {isAdminLoggedIn && showAdminLoginNote && (
-                <div className="alert alert-info alert-dismissible fade show col-12 rounded-0 m-0" role="alert" style={{ lineHeight: ".1" }}>
+                <div className="alert alert-success alert-dismissible fade show col-12 rounded-0 m-0" role="alert" style={{ lineHeight: ".1" }}>
                     <div className="d-flex justify-content-between">
                         <span style={{ margin: "auto"}}>You are logged in as an admin! Welcome!</span>
                         <button
