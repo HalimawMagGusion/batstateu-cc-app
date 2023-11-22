@@ -8,6 +8,8 @@ import { FaEye, FaEyeSlash} from "react-icons/fa";
 import {Button, InputGroup} from 'react-bootstrap';
 
 
+
+
 const handleFirebaseError = (errorCode) => {
     switch (errorCode) {
         case "auth/user-not-found":
@@ -18,7 +20,6 @@ const handleFirebaseError = (errorCode) => {
             return "Too many unsuccessful login attempts. Please try again later.";
         case "auth/network-request-failed":
             return "Network error. Please check your internet connection.";
-        // Add more cases as needed for specific error handling
         default:
             return "Invalid SR-Code or password. Please try again.";
     }

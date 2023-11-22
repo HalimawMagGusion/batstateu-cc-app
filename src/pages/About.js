@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 
 
 const cardStyle = {
-  height: '280px', // Adjust the height as needed
+  height: '280px', 
   marginBottom: '30px',
   overflow: 'auto'
 }

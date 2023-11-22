@@ -12,48 +12,34 @@ const Home = () => {
   const [ads, setAds] = useState([]);
   const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
+
+  const locations = ["Pablo Borbon", "Alangilan", "Lipa", "Nasugbu", "Malvar", "Lemery", "Balayan", "Lobo", "Rosario", "San Juan"]
 
   const getAds = async () => {
     const adsRef = collection(db, "ads");
-    let q;
+    let q = adsRef;
   
-    if (filter !== "") {
-      if (sort === "high") {
-        q = query(
-          adsRef,
-          where("category", "==", filter),
-          orderBy("price", "desc")
-        );
-      } else if (sort === "low") {
-        q = query(
-          adsRef,
-          where("category", "==", filter),
-          orderBy("price", "asc")
-        );        
-      } else if (sort === "oldest") {
-        q = query(
-          adsRef,
-          where("category", "==", filter),
-          orderBy("publishedAt", "asc")
-        ); 
-      } else {
-        q = query(
-          adsRef,
-          where("category", "==", filter),
-          orderBy("publishedAt", "desc")
-        );
-      }
+    if (filter && locationFilter) {
+      // Both category and location filters are set
+      q = query(
+        q,
+        where("category", "==", filter),
+        where("location", "==", locationFilter),
+        ...applySorting(sort)
+      );
+    } else if (filter) {
+      // Only category filter is set
+      q = query(q, where("category", "==", filter), ...applySorting(sort));
+    } else if (locationFilter) {
+      // Only location filter is set
+      q = query(q, where("location", "==", locationFilter), ...applySorting(sort));
     } else {
-      if (sort === "high") {
-        q = query(adsRef, orderBy("price", "desc"));
-      } else if (sort === "low") {
-        q = query(adsRef, orderBy("price", "asc"));
-      } else if (sort === "oldest") {
-        q = query(adsRef, orderBy("publishedAt", "asc"));
-      } else {
-        q = query(adsRef, orderBy("publishedAt", "desc"));
-      }
+      // No filters are set
+      q = query(q, ...applySorting(sort));
     }
+  
+  
   
     const adDocs = await getDocs(q);
     let ads = [];
@@ -61,9 +47,24 @@ const Home = () => {
     setAds(ads);
   };
 
+  const applySorting = (sort) => {
+    switch (sort) {
+      case "latest":
+        return [orderBy("publishedAt", "desc")];
+      case "oldest":
+        return [orderBy("publishedAt", "asc")];
+      case "high":
+        return [orderBy("price", "desc")];
+      case "low":
+        return [orderBy("price", "asc")];
+      default:
+        return [];
+    }
+  };
+
   useEffect(() => {
     getAds();
-  }, [filter, sort]);
+  }, [filter, locationFilter, sort]);
 
   const containerStyle = {
     position: 'relative',
@@ -114,39 +115,60 @@ const Home = () => {
 
 
 
-      <div className="d-flex justify-content-center justify-content-md-between align-items-center flex-wrap mb-5 mt-5 form">
-        <div>
-          <h6 className="pointer">Filter By Category</h6>
-          <select
-            className="form-select"
-            style={{ width: "200px", margin:"auto"}}
-            onChange={(e) => setFilter(e.target.value)}
-          >
-            <option value="">All</option>
-            <option value="School Supplies">School Supplies</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Fashion">Fashion</option>
-            <option value="Furniture">Furniture</option>
-            <option value="Services">Services</option>
-            <option value="Services">In Search Of</option>
-            <option value="Lost and Found">Lost and Found</option>
-            <option value="Miscellaneous">Miscellaneous</option>
-          </select>
-        </div>
-        <div>
-          <h6 className="pointer">Sort By</h6>
-          <select
-            className="form-select "
-            style={{ width: "200px", margin: "auto" }}
-            onChange={(e) => setSort(e.target.value)}
-          >
-            <option value="">Latest-Oldest</option>
-            <option value="low">Oldest-Latest</option>
-            <option value="high">Highest-Lowest Price</option>
-            <option value="low">Lowest-Highest Price</option>
-          </select>
-        </div>
-      </div>
+    <div className="d-flex justify-content-center align-items-center mb-5 mt-5 form">
+  {/* Filter By Location */}
+  <div className="mx-3" style={{ width: "200px" }}>
+    <h6 className="pointer">Filter By Campus</h6>
+    <select
+      className="form-select"
+      style={{ width: "100%" }}
+      onChange={(e) => setLocationFilter(e.target.value)}
+    >
+      <option value="">All</option>
+      {locations.map((location) => (
+        <option key={location} value={location}>
+          {location}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  {/* Filter By Category */}
+  <div className="mx-3" style={{ width: "200px" }}>
+    <h6 className="pointer">Filter By Category</h6>
+    <select
+      className="form-select"
+      style={{ width: "100%" }}
+      onChange={(e) => setFilter(e.target.value)}
+    >
+      <option value="">All</option>
+      <option value="School Supplies">School Supplies</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Fashion">Fashion</option>
+      <option value="Furniture">Furniture</option>
+      <option value="Services">Services</option>
+      <option value="In Search For">In Search For</option>
+      <option value="Lost and Found">Lost and Found</option>
+      <option value="Miscellaneous">Miscellaneous</option>
+    </select>
+  </div>
+
+  {/* Sort By */}
+  <div className="mx-3" style={{ width: "200px" }}>
+    <h6 className="pointer">Sort By &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+    <select
+      className="form-select"
+      style={{ width: "100%" }}
+      onChange={(e) => setSort(e.target.value)}
+    >
+      <option value="latest">Latest-Oldest</option>
+      <option value="oldest">Oldest-Latest</option>
+      <option value="high">Highest-Lowest Price</option>
+      <option value="low">Lowest-Highest Price</option>
+    </select>
+  </div>
+</div>
+
       <h3 className="mb-2">Recent Listings</h3>
       <hr className="mb-4"></hr>
       <div className="row">

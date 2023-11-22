@@ -4,20 +4,20 @@ import {Carousel} from 'react-bootstrap';
 const CarouselHeader = () => {
 
     const gradientStyle = {
-        background: 'linear-gradient(white, red)', // Adjust colors as needed
+        background: 'linear-gradient(white, red)',
         position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-        opacity: 0.3, // Adjust opacity as needed
+        opacity: 0.3, 
       };
 
     const blurredImageStyle = {
         width: '100%',
         height: '100%',
         objectFit: 'cover',
-        filter: 'brightness(0.8) blur(1px)', // Adjust the blur value as needed
+        filter: 'brightness(0.8) blur(1px)', 
       };
     
 
@@ -26,8 +26,8 @@ const CarouselHeader = () => {
     
     <div className="mt-5 shadow">
         <div style={{ borderRadius: '15px', overflow: 'hidden' }}>
-        <Carousel style={{ height: '300px',  backgroundSize: 'cover', backgroundPosition: 'center'  }} >
-        <Carousel.Item>
+        <Carousel style={{ height: '300px',  backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '15px', overflow: 'hidden'  }} >
+        <Carousel.Item >
           <div style={blurredImageStyle}>
             <img
               className="d-block w-100"
